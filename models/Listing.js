@@ -6,7 +6,7 @@ var User = require('../models/User.js');
 var listingSchema = mongoose.Schema({
 	name  : {type: String, required: true},
 	prize : {type: String, required: true},
-	image : {type: Buffer, contentType: String, required: false},
+	image : {type: String, required: false},
 	posts : [Post.schema]
 });
 
@@ -23,13 +23,13 @@ listingSchema.statics.getAll = function() {
 	return allListings;
 }
 
-listingSchema.statics.addPostToListing = function(listing_id, tagline, path) {
+listingSchema.statics.addPostToListing = function(listing_id, tagline, name) {
 	this.findById(listing_id, function(err, listing) {
 		if(err) throw err;
 
 		listing.posts.push(new Post({
 			tagline: tagline,
-			image: fs.readFileSync(path),
+			image: name,
 			points: 0,
 			userid: req.user.profile.id,
 			name: req.user.profile.name

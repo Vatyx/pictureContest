@@ -17,7 +17,7 @@ listingController.create = function(req, res, next) {
 	var listing = new Listing({
 		name: req.body.name,
 		prize: req.body.prize,
-		image: fs.readFileSync(req.file.path),
+		image: req.file.filename,
 		posts: []
 
 	});
@@ -29,7 +29,7 @@ listingController.create = function(req, res, next) {
 }
 
 listingController.addPost = function(req, res, next) {
-	Listing.addPostToListing(req.body.listing_id, req.body.tagline, req.file.path);
+	Listing.addPostToListing(req.body.listing_id, req.body.tagline, req.file.filename);
 	res.send("Uploaded");
 }
 
