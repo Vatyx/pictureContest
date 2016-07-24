@@ -12,6 +12,9 @@ var auth = require('./routes/auth');
 
 var app = express();
 
+app.use(passport.initalize());
+app.use(passport.session());
+
 var mongoose = require('mongoose');
 db = mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/picturecontest")
 
