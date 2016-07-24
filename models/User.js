@@ -3,7 +3,10 @@ var mongoose = require('mongoose');
 var userSchema = mongoose.Schema({
 	accessToken  : {type: String, required: true},
 	refreshToken : {type: String, required: false},
-	profile      : {type: String, required: true},
+	profile      : {
+					id: {type: String, required: true},
+					name: {type: String, required: true}
+				   },
 	votedOn : [String]
 });
 
@@ -15,7 +18,6 @@ userSchema.statics.findOrCreate = function(parameters, callback){
 		console.log(parameters);
         mongoose.model('User').create(parameters, function (err, user){ 
 			if(err) throw err;
-			console.log("Should have saved new user?");
 			callback(err,user)
 		});
     });

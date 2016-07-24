@@ -19,10 +19,14 @@ passport.use(new FacebookStrategy({
 		callbackURL: "http://picturecontest.herokuapp.com/auth/callback"
 	},
 	function(accessToken, refreshToken, profile, done) {
+		console.log(profile);
 		 mongoose.model('User')
 			 .findOrCreate({accessToken: accessToken, 
 				 			refreshToken: refreshToken, 
-							profile: profile.id, 
+							profile: {
+										id: profile.id, 
+										name: profile.displayName
+									 },
 							votedOn: []},
 		function (err, user) {
 			console.log("calling callback");

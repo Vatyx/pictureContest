@@ -30,7 +30,9 @@ listingSchema.statics.addPostToListing = function(listing_id, tagline, path) {
 		listing.posts.push(new Post({
 			tagline: tagline,
 			image: fs.readFileSync(path),
-			points: 0
+			points: 0,
+			userid: req.user.profile.id,
+			name: req.user.profile.name
 		}));
 
 		listing.save(function(err) {
