@@ -8,7 +8,7 @@ var userSchema = mongoose.Schema({
 });
 
 userSchema.statics.findOrCreate = function(parameters, callback){
-    mongoose.model('User').findOne({"accessToken": parameters.accessToken}, function(err, user){
+    this.findOne({"accessToken": parameters.accessToken}, function(err, user){
 		console.log("Ayo this ran");
         if (err) return callback(err);
         if(user) return callback(null, user);
