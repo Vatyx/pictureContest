@@ -26,7 +26,7 @@ any [qw(GET POST)] => '/api/comments' => sub {
   {
     push @$comments, {
       id     => int(gettimeofday * 1000),
-      author => $self->param('author'),
+      _id => $self->param('_id'),
       text   => $self->param('text'),
     };
     open my $FILE, '>', 'comments.json';
