@@ -16,14 +16,14 @@ passport.deserializeUser(function(obj, done) {
 passport.use(new FacebookStrategy({
 		clientID: 608592362644010,
 		clientSecret: "19d512f750a35c39ab90ec976652adff",
-		callbackURL: "http://picturecontest.herokuapp.com/auth/callback"
+		callbackURL: "http://localhost:3000/auth/callback"
 	},
 	function(accessToken, refreshToken, profile, done) {
 		 mongoose.model('User')
 			 .findOrCreate({accessToken: accessToken, 
 				 			refreshToken: refreshToken, 
-							profile: profile, 
-							votedOn: null},
+							profile: profile.id, 
+							votedOn: []},
 		function (err, user) {
 			console.log("calling callback");
 			return done(err, user);
@@ -32,6 +32,12 @@ passport.use(new FacebookStrategy({
 
 router.get('/', passport.authenticate('facebook'));
 
-router.get('/callback', passport.authenticate('facebook', { failureRedirect: '/'}));
+router.get('/callback', passport.authenticate('facebook', { successRedirect: '/', failureRedirect: '/'}));
+
+router.post('/logout', function(req, res){
+    req.session.destroy();
+    res.status(200).send({ "message": "Logout successful" });
+});
+
 
 module.exports = router;

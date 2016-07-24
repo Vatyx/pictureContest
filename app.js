@@ -13,11 +13,14 @@ var auth = require('./routes/auth');
 
 var app = express();
 
+var expressSession = require('express-session');
+app.use(expressSession({secret: 'secretstuff', resave: true, saveUninitialized: true}));
 app.use(passport.initialize());
 app.use(passport.session());
 
 var mongoose = require('mongoose');
 db = mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/picturecontest")
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -38,6 +41,7 @@ app.use('/auth', auth);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
+	console.log(req.path);
   var err = new Error('Not Found');
   err.status = 404;
   next(err);

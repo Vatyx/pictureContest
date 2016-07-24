@@ -6,7 +6,7 @@ var fs = require('fs');
 var listingController = {};
 
 listingController.getAll = function(req, res, next) {
-	console.log("Hello");
+	console.log(req.user);
 	Listing.find({}, function(err, listings) {
 		res.json(listings);	
 	});

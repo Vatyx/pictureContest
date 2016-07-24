@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 
 var userSchema = mongoose.Schema({
 	accessToken  : {type: String, required: true},
-	refreshToken : {type: String, required: true},
+	refreshToken : {type: String, required: false},
 	profile      : {type: String, required: true},
 	votedOn : [String]
 });
@@ -12,7 +12,10 @@ userSchema.statics.findOrCreate = function(parameters, callback){
         if (err) return callback(err);
         if(user) return callback(null, user);
 		console.log(parameters);
-        mongoose.model('User').create(parameters, function (err, user){ callback(err,user)});
+        mongoose.model('User').create(parameters, function (err, user){ 
+			if(err) console.log(err);
+			callback(err,user)
+		});
     });
 };
 
