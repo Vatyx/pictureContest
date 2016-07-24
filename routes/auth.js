@@ -15,7 +15,7 @@ passport.deserializeUser(function(obj, done) {
 passport.use(new FacebookStrategy({
 		clientID: 608592362644010,
 		clientSecret: "19d512f750a35c39ab90ec976652adff",
-		callbackURL: "http://picturecontest.herokuapp.com"
+		callbackURL: "http://picturecontest.herokuapp.com/auth/callback"
 	},
 	function(accessToken, refreshToken, profile, done) {
 		console.log("In auth");
@@ -30,5 +30,7 @@ passport.use(new FacebookStrategy({
 	}));
 
 router.get('/', passport.authenticate('facebook'));
+
+router.get('/callback', passport.authenticate('facebook', { failureRedirect: '/'}));
 
 module.exports = router;
