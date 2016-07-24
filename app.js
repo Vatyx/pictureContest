@@ -13,7 +13,7 @@ var vote = require('./routes/vote');
 var app = express();
 
 var mongoose = require('mongoose');
-db = mongoose.connect(process.env.DATABASE_URL || "mongodb://localhost/picturecontest")
+db = mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/picturecontest")
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
