@@ -19,9 +19,9 @@ var Comment = React.createClass({
 
   render: function() {
     return (
-      <div className="comment">
-        <h2 className="commentAuthor">
-          {this.props.author}
+      <div class_id="comment">
+        <h2 class_id="commentname">
+          {this.props.name}
         </h2>
         <span dangerouslySetInnerHTML={this.rawMarkup()} />
       </div>
@@ -74,7 +74,7 @@ var CommentBox = React.createClass({
   },
   render: function() {
     return (
-      <div className="commentBox">
+      <div class_id="commentBox">
         <h1>Comments</h1>
         <CommentList data={this.state.data} />
         <CommentForm onCommentSubmit={this.handleCommentSubmit} />
@@ -87,13 +87,15 @@ var CommentList = React.createClass({
   render: function() {
     var commentNodes = this.props.data.map(function(comment) {
       return (
-        <Comment author={comment._id} key={comment.name}>
+        <Comment name={comment.name} key={comment._id}>
+        hello1
           {comment.prize}
         </Comment>
       );
     });
     return (
-      <div className="commentList">
+      <div class_id="commentList">
+      hello
         {commentNodes}
       </div>
     );
@@ -102,32 +104,32 @@ var CommentList = React.createClass({
 
 var CommentForm = React.createClass({
   getInitialState: function() {
-    return {author: '', text: ''};
+    return {name: '', text: ''};
   },
-  handleAuthorChange: function(e) {
-    this.setState({author: e.target.value});
+  handlenameChange: function(e) {
+    this.setState({name: e.target.value});
   },
   handleTextChange: function(e) {
     this.setState({text: e.target.value});
   },
   handleSubmit: function(e) {
     e.preventDefault();
-    var author = this.state.author.trim();
+    var name = this.state.name.trim();
     var text = this.state.text.trim();
-    if (!text || !author) {
+    if (!text || !name) {
       return;
     }
-    this.props.onCommentSubmit({author: author, text: text});
-    this.setState({author: '', text: ''});
+    this.props.onCommentSubmit({name: name, text: text});
+    this.setState({name: '', text: ''});
   },
   render: function() {
     return (
-      <form className="commentForm" onSubmit={this.handleSubmit}>
+      <form class_id="commentForm" onSubmit={this.handleSubmit}>
         <input
           type="text"
-          placeholder="Your name"
-          value={this.state.author}
-          onChange={this.handleAuthorChange}
+          placeholder="Your _id"
+          value={this.state.name}
+          onChange={this.handlenameChange}
         />
         <input
           type="text"
