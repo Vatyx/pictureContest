@@ -14,6 +14,7 @@ userSchema.statics.findOrCreate = function(parameters, callback){
 		console.log(parameters);
         mongoose.model('User').create(parameters, function (err, user){ 
 			if(err) console.log(err);
+			console.log("Should have saved new user?");
 			callback(err,user)
 		});
     });
