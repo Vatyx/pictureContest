@@ -25,6 +25,7 @@ passport.use(new FacebookStrategy({
 							profile: profile, 
 							votedOn: null},
 		function (err, user) {
+			console.log("calling callback");
 			return done(err, user);
 		});
 	}));
