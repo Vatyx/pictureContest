@@ -39,6 +39,10 @@ app.use('/users', users);
 app.use('/listings', listing);
 app.use('/auth', auth);
 
+app.get('/loggedIn', function(req, res) {
+	res.json(req.user);
+});
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
 	console.log(req.path);

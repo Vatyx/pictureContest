@@ -32,7 +32,7 @@ passport.use(new FacebookStrategy({
 
 router.get('/', passport.authenticate('facebook'));
 
-router.get('/callback', passport.authenticate('facebook', { successRedirect: '/', failureRedirect: '/'}));
+router.get('/callback', passport.authenticate('facebook', { successRedirect: '/loggedIn', failureRedirect: '/'}));
 
 router.post('/logout', function(req, res){
     req.session.destroy();

@@ -1,6 +1,7 @@
 var mongoose = require('mongoose');
 
 var Post = require('../models/Post.js');
+var User = require('../models/User.js');
 
 var listingSchema = mongoose.Schema({
 	name  : {type: String, required: true},
@@ -48,6 +49,13 @@ listingSchema.statics.upvotePost = function(listing_id, post_id) {
 				listing.save(function(err) {
 					if(err) throw err;
 					console.log("Upvoted post");
+					User.findOne({profile: req.user.profile}, function(err, user) {
+						if(err) throw err;
+						user.votedOn.push(post_id);
+						user.save(function(err) {
+							if(err) throw err;
+						});
+					});
 					return;
 				});
 			}
