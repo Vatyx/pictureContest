@@ -15,3 +15,5 @@ userSchema.statics.findOrCreate = function(parameters, callback){
         mongoose.model('User').create(parameters, function (err, user){ callback(err,user)});
     });
 };
+
+module.exports = mongoose.model('User', userSchema);
