@@ -9,9 +9,9 @@ var userSchema = mongoose.Schema({
 
 userSchema.statics.findOrCreate = function(parameters, callback){
     mongoose.model("User").findOne({"accessToken": parameters.accessToken}, function(err, user){
-		console.log("Ayo this ran");
         if (err) return callback(err);
         if(user) return callback(null, user);
+		console.log(parameters);
         mongoose.model('User').create(parameters, function (err, user){ callback(err,user)});
     });
 };

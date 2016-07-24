@@ -19,7 +19,6 @@ passport.use(new FacebookStrategy({
 		callbackURL: "http://picturecontest.herokuapp.com/auth/callback"
 	},
 	function(accessToken, refreshToken, profile, done) {
-		console.log("In auth");
 		 mongoose.model('User')
 			 .findOrCreate({accessToken: accessToken, 
 				 			refreshToken: refreshToken, 
