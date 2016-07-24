@@ -24,7 +24,7 @@ listingController.create = function(req, res, next) {
 
 	listing.save(function(err) {
 		if(err) throw err;
-		console.log("Created new listing");
+		res.send("Created new listing");
 	});
 }
 
