@@ -1,6 +1,7 @@
 'use strict'
 
 var Listing = require('../models/Listing.js');
+var fs = require('fs');
 
 var listingController = {};
 
@@ -12,23 +13,23 @@ listingController.getAll = function(req, res, next) {
 }
 
 listingController.create = function(req, res, next) {
-	console.log(req.body);
+	console.log(req.file);
 	var listing = new Listing({
 		name: req.body.name,
 		prize: req.body.prize,
+		image: fs.readFileSync(req.file.path),
 		posts: []
 
 	});
 
 	listing.save(function(err) {
 		if(err) throw err;
-		console.log("Oh wow first try");
-		res.send("Oh wow first try");
+		console.log("Created new listing");
 	});
 }
 
 listingController.addPost = function(req, res, next) {
-	Listing.addPostToListing(req.body.listing_id, req.body.tagline);
+	Listing.addPostToListing(req.body.listing_id, req.body.tagline, req.file.path);
 	res.send("Uploaded");
 }
 

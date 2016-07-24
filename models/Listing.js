@@ -22,16 +22,15 @@ listingSchema.statics.getAll = function() {
 	return allListings;
 }
 
-listingSchema.statics.addPostToListing = function(listing_id, tagline) {
+listingSchema.statics.addPostToListing = function(listing_id, tagline, path) {
 	this.findById(listing_id, function(err, listing) {
 		if(err) throw err;
 
-		console.log("before");
 		listing.posts.push(new Post({
 			tagline: tagline,
+			image: fs.readFileSync(path),
 			points: 0
 		}));
-		console.log("after");
 
 		listing.save(function(err) {
 			if(err) throw err;
