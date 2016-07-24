@@ -7,8 +7,13 @@ var bodyParser = require('body-parser');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
+var listing = require('./routes/listing');
+var vote = require('./routes/vote');
 
 var app = express();
+
+var mongoose = require('mongoose');
+db = mongoose.connect(process.env.DATABASE_URL || "mongodb://localhost/picturecontest")
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
