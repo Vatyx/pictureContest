@@ -16,7 +16,7 @@ passport.deserializeUser(function(obj, done) {
 passport.use(new FacebookStrategy({
 		clientID: 608592362644010,
 		clientSecret: "19d512f750a35c39ab90ec976652adff",
-		callbackURL: "http://picturecontest.herokuapp.com"
+		callbackURL: "http://picturecontest.herokuapp.com/auth/callback"
 	},
 	function(accessToken, refreshToken, profile, done) {
 		 mongoose.model('User')
